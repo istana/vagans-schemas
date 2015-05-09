@@ -1,0 +1,94 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "http://myrtana.sk/metadata/dublincore",
+	"description": "Dublin Core metadata basic",
+	"type": "object",
+
+	"definitions": {
+	 "entity_person": {
+		 "anyOf": [
+				{ "$ref": "#/definitions/author" },
+				{ "$ref": "#/definitions/organization" },
+				{ "$ref": "#/definitions/service" }
+			]
+		}
+	},
+	"additionalProperties": false,
+	"properties": {
+		"contributor": {
+			"type": "array",
+			"items":  { "$ref": "#/definitions/person_entity" },
+			"minItems": 0
+		},
+		"coverage": {
+		  "type": "array"
+
+		},
+		"creator": {
+			"type": "array",
+			"items":  { "$ref": "#/definitions/person_entity" },
+			"minItems": 0
+		},
+		"date": {
+			"type": "array",
+			"items": { "$ref": "#/definitions/W3CDTF" }
+		},
+		"description": {
+			"type": "array",
+			"items":  { "$ref": "#/definitions/short_text" },
+			"minItems": 0
+		},
+		"format": {
+			"type": "array",
+			"items":  { "$ref": "#/definitions/short_text" },
+			"minItems": 0
+		},
+		"identifier": {
+			"type": "array",
+			"items":  { "$ref": "#/definitions/short_text" },
+			"minItems": 0
+		},
+		"language": {
+			"type": "array",
+			"items":  { "$ref": "#/definitions/short_text" },
+			"minItems": 0
+		},
+		"publisher": {
+			"type": "array",
+			"items":  { "$ref": "#/definitions/person_entity" },
+			"minItems": 0
+		},
+		"relation": {
+			"type": "array",
+			"items":  { "$ref": "#/definitions/short_text" },
+			"minItems": 0
+		},
+		"rights": {
+			"type": "array",
+			"items":  { "$ref": "#/definitions/short_text" },
+			"minItems": 0
+		},
+		"source": {
+			"type": "array",
+			"items":  { "$ref": "#/definitions/short_text" },
+			"minItems": 0
+		},
+		"subject": {
+			"type": "array",
+			"items":  { "$ref": "#/definitions/short_text" },
+			"minItems": 0
+		},
+		"title": {
+			"type": "array",
+			"items":  { "$ref": "#/definitions/short_text" },
+			"minItems": 0
+		},
+		"type": {
+			"type": "array",
+			"items":  { "$ref": "#/definitions/short_text" },
+			"minItems": 0
+		}
+	}
+
+} 
+ 
