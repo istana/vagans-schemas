@@ -8,7 +8,7 @@ gulp.task('help', taskListing);
 
 gulp.task('lint', function() {
 	console.log('Running lint');
-	return gulp.src(['./src/**/*.js[on]?', './*.js[on]?', './test/**/*.js'])
+	return gulp.src(['./src/**/*.js[on]?', './*.js[on]?', './test/**/*.js[on]?'])
 		.pipe(jshint())
 		.pipe(jshint.reporter(stylish));
 });
