@@ -39,12 +39,15 @@ var printErrors = function() {
 	}
 };
 
+var jsonErrors = null;
+
 var validateSchema = function(schema, sample) {
 	// TODO handle external schemas
 	var externalSchemas = {};
 	var val = validator(schema);
 	// greedy tries to validate the most of the document
 	var vali = val(sample, {schemas: externalSchemas, greedy: true});
+	jsonErrors = val.errors;
   return vali;
 };
 
@@ -136,7 +139,8 @@ describe('All JSON Schemas', function() {
 
 								var sample = JSON.parse(fs.readFileSync(sampleURI));
 								var validated = validateSchema(schemaContent, sample);
-								assert.equal(validated, true, 'IS NOT VALID: ' + validated.errors);
+								console.log(validated);
+								assert.equal(validated, true, 'IS NOT VALID, cause: ' + JSON.stringify(jsonErrors));
 							});
 						});
 					});
