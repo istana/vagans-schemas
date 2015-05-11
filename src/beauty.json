@@ -1,5 +1,5 @@
 {
-  "id": "http://schemas.myrtana.sk/beauty/paragraph#",
+  "id": "http://schema.myrtana.sk/beauty.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
 	"title": "Beauty",
 	"description": "Everything beautiful",

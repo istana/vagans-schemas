@@ -1,5 +1,5 @@
 {
-  "id": "http://schemas.myrtana.sk/text/sourcecode#",
+  "id": "http://schema.myrtana.sk/text/sourcecode.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
 	"title": "Source code",
 	"description": "Source code, snippet of source code",

@@ -1,6 +1,6 @@
 {
+	"id": "http://schema.myrtana.sk/metadata/dublincore.json",
 	"$schema": "http://json-schema.org/draft-04/schema#",
-	"id": "http://myrtana.sk/metadata/dublincore",
 	"description": "Dublin Core metadata basic",
 	"type": "object",
 
