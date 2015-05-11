@@ -1,6 +1,12 @@
 // run this test from root path
 // because paths are made that way
 
+// 1. find schema
+// 2. test if valid json
+// 3. find samples
+// 4. test if sample valid json
+// 5. test sample against the schema
+
 var errors = [];
 
 var loadModule = function(path) {
@@ -43,25 +49,62 @@ var jsonErrors = null;
 
 var validateSchema = function(schema, sample) {
 	// TODO handle external schemas
-	var externalSchemas = {};
-	var val = validator(schema);
+	//var externalSchemas = {};
+	//var val = validator(schema);
 	// greedy tries to validate the most of the document
-	var vali = val(sample, {schemas: externalSchemas, greedy: true});
-	jsonErrors = val.errors;
-  return vali;
+	//var vali = val(sample, {schemas: externalSchemas, greedy: true});
+	//jsonErrors = val.errors;
+
+	var valid = validator.validate(sample, schema);
+	jsonErrors = validator.getLastErrors();
+  return valid;
 };
 
 global.fs = loadModule("fs");
 global.chai = loadModule("chai");
 global.assert = chai.assert;
 global.glob = loadModule("glob");
-global.validator = loadModule("is-my-json-valid");
+//global.validator = loadModule("is-my-json-valid");
+//global.validator = loadModule("jsen");
+global.ZSchema = loadModule("z-schema");
+/*global.validator = new ZSchema({
+	noExtraKeywords: true,
+	forceItems: true,
+	forceMinItems: true,
+	forceMaxItems: true,
+	forceMinLength: true,
+	forceMaxLength: true,
+	forceProperties: true,
+	breakOnFirstError: false
+});*/
+global.validator = new ZSchema();
 global.path = loadModule("path");
 
-global.schema = loadFile('../src/schemaschema-draft04/schema.json');
-global.hyperschema = loadFile('../src/schemaschema-draft04/hyper-schema.json');
+global.schema04 = JSON.parse(loadFile('../resources/schemaschema-draft04/schema.json'));
+global.hyperschema04 = JSON.parse(loadFile('../resources/schemaschema-draft04/hyper-schema.json'));
 
 printErrors();
+
+var schemaFiles = glob.sync(path.resolve(__dirname, "../src/**/*.js[on]?"), null);
+
+// the nice and essential feature of z-schema it allows to set remote schemas manually
+// it means, that I can set them up by hand and no automatic downloader will attempt to download
+// them from the internet
+// I could reference uris without url, but ultimately I want them to be available on that address
+// but it is insane to try it in development, setting up http server, playing with dns, ...
+// z-schema has one disadvantage, that local references doesn't work nicely if remote are used
+// so cannot use #/definitions/something
+
+// need to set external references to schemas, so it plays nicely
+validator.setRemoteReference("http://json-schema.org/draft-04/schema", schema04);
+validator.setRemoteReference("http://json-schema.org/draft-04/hyper-schema", hyperschema04);
+// TODO handle invalid JSON, run the test beforehand
+schemaFiles.forEach(function(schemaFile, index, arr) {
+	var schemaURI = path.relative(path.join(__dirname, "..", "src"), schemaFile);
+	validator.setRemoteReference("http://schema.myrtana.sk/" + schemaURI, JSON.parse(fs.readFileSync(schemaFile)));
+});
+
+console.log(JSON.stringify(validator, null, 4));
 
 // globs needs to be synchronous for tests to work properly!
 console.log('Common errors:');
@@ -69,7 +112,6 @@ console.log('SyntaxError: Unexpected token } - malformated JSON');
 console.log('SyntaxError: Unexpected end of input - JSON file is empty, must be at least {} or []');
 
 describe('All JSON Schemas', function() {
-  var schemaFiles = glob.sync(path.resolve(__dirname, "../src/**/*.js[on]?"), null);
 
 	if(schemaFiles.length === 0) {
 		console.log("No JSON schemas found in src/, maybe download some from schemas.myrtana.sk or create a new one?");
@@ -140,7 +182,7 @@ describe('All JSON Schemas', function() {
 								var sample = JSON.parse(fs.readFileSync(sampleURI));
 								var validated = validateSchema(schemaContent, sample);
 								console.log(validated);
-								assert.equal(validated, true, 'IS NOT VALID, cause: ' + JSON.stringify(jsonErrors));
+								assert.equal(validated, true, 'IS NOT VALID, cause: ' + JSON.stringify(jsonErrors, null, 4));
 							});
 						});
 					});
