@@ -104,12 +104,13 @@ schemaFiles.forEach(function(schemaFile, index, arr) {
 	validator.setRemoteReference("http://schema.myrtana.sk/" + schemaURI, JSON.parse(fs.readFileSync(schemaFile)));
 });
 
-console.log(JSON.stringify(validator, null, 4));
+//console.log(JSON.stringify(validator, null, 4));
+console.log(Object.keys(validator.cache));
 
 // globs needs to be synchronous for tests to work properly!
-console.log('Common errors:');
-console.log('SyntaxError: Unexpected token } - malformated JSON');
-console.log('SyntaxError: Unexpected end of input - JSON file is empty, must be at least {} or []');
+//console.log('Common errors:');
+//console.log('SyntaxError: Unexpected token } - malformated JSON');
+//console.log('SyntaxError: Unexpected end of input - JSON file is empty, must be at least {} or []');
 
 describe('All JSON Schemas', function() {
 
