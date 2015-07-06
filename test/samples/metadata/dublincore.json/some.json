@@ -1,3 +1,5 @@
 {
-	"contributor": ["Elena"]
+	"contributor": ["Elena"],
+	"coverage": ["test"],
+	"creator": ["Stefan"]
 }
