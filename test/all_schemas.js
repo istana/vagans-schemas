@@ -161,7 +161,7 @@ describe('All JSON Schemas', function() {
 								);
 
 								var sample = JSON.parse(fs.readFileSync(sampleURI));
-								assert.equal(validateSchema(schemaContent, sample), false, 'IS VALID');
+								assert.equal(validateSchema(schemaContent, sample), false, 'IS VALID, but should not be');
 							});
 						});
 					});
