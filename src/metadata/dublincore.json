@@ -13,7 +13,32 @@
 					{ "$ref": "http://schema.myrtana.sk/entities/entityOrPerson.json" }
 				]
 			}
+		},
+		"coverage": {
+			"type": "array"
+		},
+		"creator": {
+			"type": "array",
+			"items": {
+				"anyOf": [
+					{ "$ref": "http://schema.myrtana.sk/entities/entityOrPerson.json" }
+				]
+			},
+			"minItems": 0
+		},
+		"date": {
+			"type": "array"
+		},
+		"description": {
+			"type": "array",
+			"items": {
+				"anyOf": [
+					{ "$ref": "http://schema.myrtana.sk/text/coupleOfParagraphs.json" }
+				]
+			},
+			"minItems": 0
 		}
+
 	}
 
 } 
