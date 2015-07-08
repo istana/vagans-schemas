@@ -15,7 +15,8 @@
 			}
 		},
 		"coverage": {
-			"type": "array"
+			"type": "array",
+			"minItems": 0
 		},
 		"creator": {
 			"type": "array",
@@ -27,7 +28,18 @@
 			"minItems": 0
 		},
 		"date": {
-			"type": "array"
+			"type": "object",
+			"properties": {
+				"updated_at": {
+					"type": "http://schema.myrtana.sk/support/datetime.json"
+				},
+				"created_at": {
+					"type": "http://schema.myrtana.sk/support/datetime.json"
+				},
+				"published_at": {
+					"type": "http://schema.myrtana.sk/support/datetime.json"
+				}
+			}
 		},
 		"description": {
 			"type": "array",
@@ -37,9 +49,95 @@
 				]
 			},
 			"minItems": 0
+		},
+		"format": {
+		  "type": "array",
+			"items": {
+				"anyOf": [
+					{ "$ref": "http://schema.myrtana.sk/text/shortString.json" }
+				]			
+			}
+		},
+		"identifier": {
+		  "type": "array",
+			"items": {
+				"anyOf": [
+					{ "$ref": "http://schema.myrtana.sk/text/shortString.json" }
+				]			
+			}		
+		},
+		"language": {
+		  "type": "array",
+			"items": {
+				"anyOf": [
+					{ "$ref": "http://schema.myrtana.sk/support/languageRFC4646.json" }
+				]			
+			}				
+		},
+		"publisher": {
+			"type": "array",
+			"items": {
+				"anyOf": [
+					{ "$ref": "http://schema.myrtana.sk/entities/entityOrPerson.json" }
+				]
+			},
+			"minItems": 0
+		},
+		"relation": {
+		  "type": "array",
+			"items": {
+				"anyOf": [
+					{ "$ref": "http://schema.myrtana.sk/support/url.json" },
+					{ "$ref": "http://schema.myrtana.sk/support/bibliographicBibTeXLike.json" }
+				]			
+			},
+			"minItems": 0
+		},
+		"rights": {
+		  "type": "array",
+			"items": {
+				"anyOf": [
+					{ "$ref": "http://schema.myrtana.sk/support/url.json" },
+					{ "$ref": "http://schema.myrtana.sk/entities/entityOrPerson.json" }
+				]			
+			},
+			"minItems": 0
+		},
+		"source": {
+		  "type": "array",
+			"items": {
+				"anyOf": [
+					{ "$ref": "http://schema.myrtana.sk/support/url.json" },
+					{ "$ref": "http://schema.myrtana.sk/entities/entityOrPerson.json" }
+				]			
+			},
+			"minItems": 0
+		},
+		"subject": {
+		  "type": "array",
+			"items": {
+				"anyOf": [
+					{ "$ref": "http://schema.myrtana.sk/text/tag.json" }
+				]			
+			},
+			"minItems": 0
+		},
+		"title": {
+		  "type": "array",
+			"items": {
+				"anyOf": [
+					{ "$ref": "http://schema.myrtana.sk/text/shortString.json" }
+				]			
+			}		
+		},
+		"type": {
+		  "type": "array",
+			"items": {
+				"anyOf": [
+					{ "$ref": "http://schema.myrtana.sk/text/shortString.json" }
+				]			
+			}		
 		}
-
 	}
-
 } 
  
